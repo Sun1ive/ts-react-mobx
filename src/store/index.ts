@@ -5,7 +5,7 @@ export interface Store {
   increment: () => void;
 }
 
-export default class {
+class MobxStore implements Store {
   @observable count = 0;
 
   @action.bound
@@ -15,3 +15,5 @@ export default class {
     console.log(this.count);
   }
 }
+
+export default MobxStore;

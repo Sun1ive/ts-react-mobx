@@ -1,12 +1,11 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Store from './store';
-import { observable } from 'mobx';
+import MobxStore, { Store } from './store';
 
-const appStore = new Store();
+const appStore = new MobxStore();
 
-export const StoreContext = createContext(appStore);
+export const StoreContext = createContext<Store>(appStore);
 
 ReactDOM.render(
   <StoreContext.Provider value={appStore}>
