@@ -5,11 +5,19 @@ import MobxStore, { Store } from './store';
 
 const appStore = new MobxStore();
 
-export const StoreContext = createContext<Store>(appStore);
+export const Context = createContext<{ theme: string; store: Store }>({
+  theme: '',
+  store: appStore
+});
 
 ReactDOM.render(
-  <StoreContext.Provider value={appStore}>
+  <Context.Provider
+    value={{
+      theme: 'dark',
+      store: appStore
+    }}
+  >
     <App />
-  </StoreContext.Provider>,
+  </Context.Provider>,
   document.getElementById('root')
 );

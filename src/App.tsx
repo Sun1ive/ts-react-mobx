@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { observer, Observer } from 'mobx-react';
-import { StoreContext } from './index';
+import { Context } from './index';
 
 @observer
 class App extends Component {
   render() {
     return (
-      <StoreContext.Consumer>
-        {store => (
+      <Context.Consumer>
+        {ctx => (
           <Observer>
             {() => (
               <div>
-                <p>Count: {store.count}</p>
-                <button onClick={store.increment}>increment</button>
+                <p>Count: {ctx.store.count}</p>
+                <button onClick={ctx.store.increment}>increment</button>
               </div>
             )}
           </Observer>
         )}
-      </StoreContext.Consumer>
+      </Context.Consumer>
     );
   }
 }
