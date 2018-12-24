@@ -10,6 +10,8 @@ export default class {
 
   @action.bound
   increment() {
+    console.log('fired ?');
     this.count += 1;
+    console.log(this.count);
   }
 }

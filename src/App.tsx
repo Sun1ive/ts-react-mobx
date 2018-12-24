@@ -1,23 +1,25 @@
-import React from 'react';
-import { observer } from 'mobx-react';
-import { Store } from './store';
-
-interface props {
-  store: Store;
-}
+import React, { Component, createContext } from 'react';
+import { observer, Observer } from 'mobx-react';
+import { StoreContext } from './index';
 
 @observer
-class App extends React.Component<props> {
+class App extends Component {
   render() {
-    const { count, increment } = this.props.store;
     return (
-      <div>
-        Hello world
-        <p>Count: {count}</p>
-        <button onClick={increment}>increment</button>
-      </div>
+      <StoreContext.Consumer>
+        {(store: any) => (
+          <Observer>
+            {() => (
+              <div>
+                Hello world
+                <p>Count: {store.count}</p>
+                <button onClick={store.increment}>increment</button>
+              </div>
+            )}
+          </Observer>
+        )}
+      </StoreContext.Consumer>
     );
   }
 }
-
 export default App;
