@@ -1,5 +1,6 @@
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component } from 'react';
 import { Context } from '../../index';
+import { observer, Observer } from 'mobx-react';
 import './index.css';
 
 type InputHandler = {
@@ -7,15 +8,13 @@ type InputHandler = {
   property: string;
 };
 
+@observer
 export class Login extends Component {
+  static contextType = Context;
+
   state = {
     email: '',
     password: ''
-  };
-
-  onLogInHanlder = (event: SyntheticEvent) => {
-    event.preventDefault();
-    console.log(this);
   };
 
   inputHandler = ({ property, value }: InputHandler) => {
@@ -26,39 +25,31 @@ export class Login extends Component {
 
   render() {
     return (
-      <Context.Consumer>
-        {ctx => (
-          <div className="login-container">
-            <form
-              className="form"
-              onSubmit={event => {
-                event.preventDefault();
-                ctx.store.onSignIn({
-                  email: this.state.email,
-                  password: this.state.password
-                });
-              }}
-            >
-              <input
-                onChange={event => this.setState({ email: event.target.value })}
-                className="form-input"
-              />
-              <input
-                className="form-input"
-                onChange={event =>
-                  this.inputHandler({
-                    value: event.target.value,
-                    property: 'password'
-                  })
-                }
-              />
-              <button type="submit" className="form-submit">
-                Sign in
-              </button>
-            </form>
-          </div>
-        )}
-      </Context.Consumer>
+      <div className="login-container">
+        <form
+          className="form"
+          onSubmit={event => {
+            event.preventDefault();
+          }}
+        >
+          <input
+            onChange={event => this.setState({ email: event.target.value })}
+            className="form-input"
+          />
+          <input
+            className="form-input"
+            onChange={event =>
+              this.inputHandler({
+                value: event.target.value,
+                property: 'password'
+              })
+            }
+          />
+          <button type="submit" className="form-submit">
+            Sign in
+          </button>
+        </form>
+      </div>
     );
   }
 }

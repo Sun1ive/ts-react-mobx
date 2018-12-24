@@ -1,4 +1,11 @@
-import { observable, action } from 'mobx';
+import {
+  configure,
+  runInAction,
+  autorun,
+  observable,
+  action,
+  computed
+} from 'mobx';
 import Client from '../api';
 
 const API = new Client();
@@ -8,25 +15,38 @@ type credentials = {
   password: string;
 };
 
+type auth = {
+  accessToken: string;
+  refreshToken: string;
+  email: string;
+  id: string;
+};
+
+configure({
+  enforceActions: 'observed'
+});
+
 export interface Store {
-  auth: null | {};
+  auth: auth | null;
   onSignIn: ({ email, password }: credentials) => Promise<any>;
 }
 
 class MobxStore implements Store {
-  @observable auth = null;
+  auth = {
+    accessToken: '',
+    refreshToken: '',
+    id: '',
+    email: ''
+  };
 
-  @action.bound
-  async onSignIn({ email, password }: credentials) {
-    // const { data } = await API.client.post('/auth/signin', {
-    //   email,
-    //   password
-    // });
-
+  @action
+  onSignIn = async ({ email, password }: credentials) => {
     const data = await API.login({ email, password });
 
-    console.log(data);
-  }
+    autorun(() => {
+      this.auth = data;
+    });
+  };
 }
 
 export default MobxStore;

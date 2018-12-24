@@ -12,7 +12,9 @@ class Api implements IApi {
 
   public async login({ email, password }: { email: string; password: string }) {
     try {
-      const { data } = await this.client.post('/api/auth/signin', {
+      const {
+        data: { data }
+      } = await this.client.post('/api/auth/signin', {
         email,
         password
       });
