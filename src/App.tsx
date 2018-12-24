@@ -1,8 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { observer } from 'mobx-react';
+import { Store } from './store';
 
-class App extends Component {
+interface props {
+  store: Store;
+}
+
+@observer
+class App extends React.Component<props> {
   render() {
-    return <div>HEllo</div>;
+    const { count, increment } = this.props.store;
+    return (
+      <div>
+        Hello world
+        <p>Count: {count}</p>
+        <button onClick={increment}>increment</button>
+      </div>
+    );
   }
 }
 
