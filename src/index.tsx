@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import MobxStore, { Store } from './store';
+import MobxStore from './store';
 import './index.css';
 
 const appStore = new MobxStore();

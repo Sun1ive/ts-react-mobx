@@ -1,7 +1,6 @@
 import {
   configure,
   runInAction,
-  autorun,
   observable,
   action,
   computed
@@ -32,18 +31,18 @@ export interface Store {
 }
 
 class MobxStore implements Store {
-  auth = {
+  @observable auth = {
     accessToken: '',
     refreshToken: '',
     id: '',
     email: ''
   };
 
-  @action
+  @action.bound
   onSignIn = async ({ email, password }: credentials) => {
     const data = await API.login({ email, password });
 
-    autorun(() => {
+    runInAction(() => {
       this.auth = data;
     });
   };
