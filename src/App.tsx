@@ -1,14 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { observer, Observer } from 'mobx-react';
-import { Context } from './index';
 import { Login } from './pages/Login';
+import { Store } from './store';
+
+type Props = {
+  store: Store;
+};
 
 @observer
-class App extends Component {
+class App extends Component<Props> {
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
     return (
       <div>
-        <h1>Hello</h1>
         <Login />
       </div>
     );

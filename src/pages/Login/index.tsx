@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Context } from '../../index';
+import React, { Component, createContext } from 'react';
 import { observer, Observer } from 'mobx-react';
 import './index.css';
 
@@ -10,8 +9,6 @@ type InputHandler = {
 
 @observer
 export class Login extends Component {
-  static contextType = Context;
-
   state = {
     email: '',
     password: ''
