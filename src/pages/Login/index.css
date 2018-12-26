@@ -1,39 +1,7 @@
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .form {
-  width: 100%;
+  min-width: 400px;
   display: flex;
   flex-flow: column;
-  max-width: 480px;
   margin: 0 auto;
-}
-
-.form-input {
-  padding: 6px;
-  font-size: 18px;
-  line-height: 1.33;
-  font-weight: 600;
-  margin: 6px 0;
-  border-top: none;
-  border-right: none;
-  outline: none;
-  border-left: none;
-}
-
-.form-input:focus {
-  border-color: lightskyblue;
-}
-
-.form-submit {
-  background-color: lightskyblue;
-  color: white;
-  padding: 16px 8px;
-  cursor: pointer;
-  border: none;
-  border-radius: 3px;
 }

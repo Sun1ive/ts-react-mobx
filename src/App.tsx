@@ -8,7 +8,7 @@ const styles = {};
 class App extends Component {
   render() {
     return (
-      <Grid container>
+      <Grid container justify="center">
         <Grid item xs={8}>
           <Login />
         </Grid>

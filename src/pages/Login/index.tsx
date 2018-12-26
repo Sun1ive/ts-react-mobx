@@ -1,5 +1,6 @@
 import React, { Component, SyntheticEvent } from 'react';
-import { observer, Observer } from 'mobx-react';
+import { observer } from 'mobx-react';
+import Grid from '@material-ui/core/Grid';
 import './index.css';
 import { Context } from '../../store';
 
@@ -34,7 +35,6 @@ export class Login extends Component<{}, LoginState> {
 
     const { store } = this.context;
 
-    console.log(this.context);
     await store.onSignIn({
       email: this.state.email,
       password: this.state.password
@@ -54,32 +54,36 @@ export class Login extends Component<{}, LoginState> {
       );
 
     return (
-      <div className="login-container">
-        <h1>{isFetched}</h1>
-        <form className="form" onSubmit={this.onSubmitHanlder}>
-          <input
-            onChange={event =>
-              this.inputHandler({
-                value: event.target.value,
-                property: 'email'
-              })
-            }
-            className="form-input"
-          />
-          <input
-            className="form-input"
-            onChange={event =>
-              this.inputHandler({
-                value: event.target.value,
-                property: 'password'
-              })
-            }
-          />
-          <button type="submit" className="form-submit">
-            Sign in
-          </button>
-        </form>
-      </div>
+      <Grid container alignItems="center" direction="column" justify="center">
+        <Grid item>
+          <h1 className="head">{isFetched}</h1>
+        </Grid>
+        <Grid item>
+          <form className="form" onSubmit={this.onSubmitHanlder}>
+            <input
+              onChange={event =>
+                this.inputHandler({
+                  value: event.target.value,
+                  property: 'email'
+                })
+              }
+              className="form-input"
+            />
+            <input
+              className="form-input"
+              onChange={event =>
+                this.inputHandler({
+                  value: event.target.value,
+                  property: 'password'
+                })
+              }
+            />
+            <button type="submit" className="form-submit">
+              Sign in
+            </button>
+          </form>
+        </Grid>
+      </Grid>
     );
   }
 }
