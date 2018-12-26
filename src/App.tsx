@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { observer, Observer } from 'mobx-react';
 import { Login } from './pages/Login';
-import { RootProps } from './Types/Props';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 
-@observer
-class App extends Component<RootProps> {
+const styles = {};
+
+class App extends Component {
   render() {
     return (
-      <div className="container">
-        <Login store={this.props.store} />
-      </div>
+      <Grid container>
+        <Grid item xs={8}>
+          <Login />
+        </Grid>
+      </Grid>
     );
   }
 }
-export default App;
+export default withStyles(styles)(App);

@@ -1,11 +1,8 @@
-import {
-  configure,
-  runInAction,
-  observable,
-  action,
-  computed
-} from 'mobx';
+import { createContext } from 'react';
+import { configure, runInAction, observable, action, computed } from 'mobx';
 import Client from '../api';
+
+export const Context = createContext<{ store: Store } | {}>({});
 
 const API = new Client();
 
@@ -38,7 +35,7 @@ class MobxStore implements Store {
     email: ''
   };
 
-  @action.bound
+  @action
   onSignIn = async ({ email, password }: credentials) => {
     const data = await API.login({ email, password });
 

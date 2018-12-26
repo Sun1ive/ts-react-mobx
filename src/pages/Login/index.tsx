@@ -1,7 +1,7 @@
 import React, { Component, SyntheticEvent } from 'react';
 import { observer, Observer } from 'mobx-react';
 import './index.css';
-import { RootProps } from '../../Types/Props';
+import { Context } from '../../store';
 
 type InputHandler = {
   value: string | number;
@@ -14,7 +14,9 @@ type LoginState = {
 };
 
 @observer
-export class Login extends Component<RootProps, LoginState> {
+export class Login extends Component<{}, LoginState> {
+  static contextType = Context;
+
   state = {
     email: '',
     password: ''
@@ -30,16 +32,23 @@ export class Login extends Component<RootProps, LoginState> {
   onSubmitHanlder = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    await this.props.store.onSignIn({
+    const { store } = this.context;
+
+    console.log(this.context);
+    await store.onSignIn({
       email: this.state.email,
       password: this.state.password
     });
   };
 
   render() {
+    const {
+      store: { auth }
+    } = this.context;
+
     const isFetched =
-      this.props.store.auth && this.props.store.auth.accessToken.length > 0 ? (
-        <div>{this.props.store.auth.accessToken}</div>
+      auth && auth.accessToken.length > 0 ? (
+        <div>{auth.accessToken}</div>
       ) : (
         <div>Loading ...</div>
       );
